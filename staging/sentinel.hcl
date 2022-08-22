@@ -1,3 +1,3 @@
-policy "enforce-mandatory-tags" {
+policy "tag-enforcement" {
     enforcement_level = "advisory"
 }
