@@ -34,30 +34,18 @@ provider "tfe" {
   token    = var.tfe_token
 }
 
-resource "tfe_policy_set" "test" {
-  name          = "a"
+resource "tfe_policy_set" "policy set 1" {
+  name          = "security team sentinel policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "skylark"
   policies_path = "staging/"
   workspace_ids = ["ws-tGEWkng5AxjnKZTk","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
-  vcs_repo {
-    identifier         = "test1webapp/sentinel-stage"
-    branch             = "main"
-    ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
-  }
 }
 
-resource "tfe_policy_set" "test2" {
-  name          = "b"
+resource "tfe_policy_set" "policy set 2" {
+  name          = "security team sentinel policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "pigeon"
   policies_path = "staging/"
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
-  vcs_repo {
-    identifier         = "test1webapp/sentinel-stage"
-    branch             = "main"
-    ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
-  }
 }
