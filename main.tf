@@ -34,18 +34,21 @@ provider "tfe" {
   token    = var.tfe_token
 }
 
+
 resource "tfe_policy_set" "policy set 1" {
   name          = "security team sentinel policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "skylark"
   policies_path = "staging/"
   workspace_ids = ["ws-tGEWkng5AxjnKZTk","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
-}
 
+}
 resource "tfe_policy_set" "policy set 2" {
   name          = "security team sentinel policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "pigeon"
   policies_path = "staging/"
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
+
 }
+
