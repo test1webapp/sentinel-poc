@@ -35,7 +35,7 @@ provider "tfe" {
 }
 
 
-resource "tfe_policy_set" "policy set 1" {
+resource "tfe_policy_set" "policy_set_1" {
   name          = "security team sentinel policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "skylark"
@@ -43,7 +43,7 @@ resource "tfe_policy_set" "policy set 1" {
   workspace_ids = ["ws-tGEWkng5AxjnKZTk","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
 
 }
-resource "tfe_policy_set" "policy set 2" {
+resource "tfe_policy_set" "policy_set_2" {
   name          = "security team sentinel policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "pigeon"
