@@ -25,6 +25,10 @@ variable "tfe_token" {
   default     = "example_corp"
 }
 
+variable "token_id" {
+  description = "The TFE organization to apply your changes to."
+  
+}
 provider "tfe" {
   hostname = var.tfe_hostname
   token    = var.tfe_token
@@ -40,7 +44,7 @@ resource "tfe_policy_set" "d" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = "dummy"
+    oauth_token_id     = var.token_id
   }
 }
 
