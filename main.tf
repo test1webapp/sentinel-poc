@@ -34,7 +34,7 @@ provider "tfe" {
   token    = var.tfe_token
 }
 
-resource "tfe_policy_set" "d" {
+resource "tfe_policy_set" "test" {
   name          = "a"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "skylark"
@@ -48,7 +48,7 @@ resource "tfe_policy_set" "d" {
   }
 }
 
-resource "tfe_policy_set" "g" {
+resource "tfe_policy_set" "test2" {
   name          = "b"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "pigeon"
