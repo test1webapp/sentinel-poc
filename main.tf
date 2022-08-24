@@ -4,12 +4,11 @@ terraform {
     organization = "skylark"
 
     workspaces {
-      name = "terrasent"
+      name = "sentinel-stage"
     }
   }
 }
 
-variable "tfe_token" {}
 
 variable "tfe_hostname" {
   description = "The domain where your TFE is hosted."
@@ -21,34 +20,40 @@ variable "tfe_organization" {
   default     = "example_corp"
 }
 
+variable "tfe_token" {
+  description = "The TFE organization to apply your changes to."
+  default     = "example_corp"
+}
+
 provider "tfe" {
-  hostname = "${var.tfe_hostname}"
-  token    = "${var.tfe_token}"
-  version  = "~> 0.6"
+  hostname = var.tfe_hostname
+  token    = var.tfe_token
 }
 
-data "tfe_workspace_ids" "all" {
-  names        = ["*"]
-  organization = "${var.tfe_organization}"
-}
-
-data "tfe_oauth_client" "client" {
-  oauth_client_id = "d56bab77653b18c6fb93"
-}
-
-locals {
-  workspaces = "${data.tfe_workspace_ids.all.external_ids}" # map of names to IDs
-}
-
-resource "tfe_policy_set" "global" {
-  name         = "global"
-  description  = "Policies that should be enforced on ALL infrastructure."
-  organization = "${var.tfe_organization}"
+resource "tfe_policy_set" "a" {
+  name          = "a"
+  description   = "Policies that should be enforced on ALL infrastructure."
+  organization  = "skylark"
   policies_path = "staging/"
-  workspace_ids = local.workspaces
+  workspace_ids = ["ws-tGEWkng5AxjnKZTk","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
   vcs_repo {
-    identifier         = "skylark/sentinel-stage"
+    identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
-    oauth_token_id     = tfe_oauth_client.client.oauth_token_id
+    ingress_submodules = false
+    oauth_token_id     = "ot-bbmnf2JLzVbWftUN"
+  }
+}
+
+resource "tfe_policy_set" "b" {
+  name          = "b"
+  description   = "Policies that should be enforced on ALL infrastructure."
+  organization  = "pigeon"
+  policies_path = "staging/"
+  workspace_ids = ["ws-ARQa89snaZJRLQQi"]
+  vcs_repo {
+    identifier         = "test1webapp/sentinel-stage"
+    branch             = "main"
+    ingress_submodules = false
+    oauth_token_id     = var.token_id
   }
 }
