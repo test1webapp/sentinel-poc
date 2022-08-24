@@ -40,7 +40,7 @@ resource "tfe_policy_set" "d" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = "ot-bbmnf2JLzVbWftUN"
+    oauth_token_id     = ""
   }
 }
 
