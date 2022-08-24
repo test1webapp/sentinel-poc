@@ -62,7 +62,7 @@ resource "tfe_policy_set" "policy_set_3" {
 }
 
 
-resource "tfe_policy_set" "policy_set_3" {
+resource "tfe_policy_set" "policy_set_4" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "kili"
