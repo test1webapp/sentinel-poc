@@ -52,5 +52,3 @@ resource "tfe_policy_set" "global" {
     oauth_token_id     = tfe_oauth_client.client.oauth_token_id
   }
 }
-
-}
