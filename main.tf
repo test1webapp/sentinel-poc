@@ -36,7 +36,7 @@ provider "tfe" {
 
 
 resource "tfe_policy_set" "policy_set_1" {
-  name          = "security team sentinel policies"
+  name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "skylark"
   policies_path = "staging/"
@@ -44,11 +44,20 @@ resource "tfe_policy_set" "policy_set_1" {
 
 }
 resource "tfe_policy_set" "policy_set_2" {
-  name          = "security team sentinel policies"
+  name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "pigeon"
   policies_path = "staging/"
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
+
+}
+
+resource "tfe_policy_set" "policy_set_3" {
+  name          = "security_team_sentinel_policies"
+  description   = "Policies that should be enforced on ALL infrastructure."
+  organization  = "snail"
+  policies_path = "staging/"
+  workspace_ids = ["ws-nWTHbC4juL3Ltv67"]
 
 }
 
