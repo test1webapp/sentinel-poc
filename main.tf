@@ -20,7 +20,7 @@ variable "tfe_organization" {
   default     = "example_corp"
 }
 
-variable "tfe_token" {
+variable "tfe_toke" {
   description = "The TFE organization to apply your changes to."
   default     = "example_corp"
 }
