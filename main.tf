@@ -22,10 +22,10 @@ variable "tfe_organization" {
 
 variable "tfe_token" {
   description = "The TFE organization to apply your changes to."
-  default     = "example_corp"
+  
 }
 
-variable "token_id" {
+variable "oauth_token_id" {
   description = "The TFE organization to apply your changes to."
   
 }
@@ -44,7 +44,7 @@ resource "tfe_policy_set" "test" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = var.token_id
+    oauth_token_id     = var.oauth_token_id
   }
 }
 
@@ -58,6 +58,6 @@ resource "tfe_policy_set" "test2" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = var.token_id
+    oauth_token_id     = var.oauth_token_id
   }
 }
