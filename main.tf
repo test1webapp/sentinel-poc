@@ -40,7 +40,7 @@ resource "tfe_policy_set" "policy_set_1" {
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "skylark"
   policies_path = "staging/"
-  workspace_ids = ["ws-tGEWkng5AxjnKZTk","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
+  workspace_ids = ["ws-P7vBaSH4VYauZTm1","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
 
 }
 resource "tfe_policy_set" "policy_set_2" {
@@ -61,3 +61,12 @@ resource "tfe_policy_set" "policy_set_3" {
 
 }
 
+
+resource "tfe_policy_set" "policy_set_3" {
+  name          = "security_team_sentinel_policies"
+  description   = "Policies that should be enforced on ALL infrastructure."
+  organization  = "kili"
+  policies_path = "staging/"
+  workspace_ids = ["ws-Y4QeVXVeVew8Skmq"]
+
+}
