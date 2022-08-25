@@ -21,7 +21,7 @@ variable "tfe_organization" {
 }
 
 variable "tfe_token" {
-  description = "The TFE organization to apply your changes to."
+  description = "The TFE organization"
   
 }
 
@@ -51,6 +51,7 @@ resource "tfe_policy_set" "policy_set_2" {
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
 
 }
+
 
 resource "tfe_policy_set" "policy_set_3" {
   name          = "security_team_sentinel_policies"
