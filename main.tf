@@ -41,6 +41,12 @@ resource "tfe_policy_set" "policy_set_1" {
   organization  = "skylark"
   policies_path = "staging/"
   workspace_ids = ["ws-P7vBaSH4VYauZTm1","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
+  vcs_repo {
+    identifier         = "test1webapp/sentinel-stage"
+    branch             = "main"
+    ingress_submodules = false
+    oauth_token_id     = var.oauth_token_id
+  }
 
 }
 resource "tfe_policy_set" "policy_set_2" {
@@ -49,12 +55,7 @@ resource "tfe_policy_set" "policy_set_2" {
   organization  = "pigeon"
   policies_path = "staging/"
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
-  vcs_repo {
-    identifier         = "test1webapp/sentinel-stage"
-    branch             = "main"
-    ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
-  }
+  
 }
 
 resource "tfe_policy_set" "policy_set_3" {
