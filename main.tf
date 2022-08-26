@@ -25,6 +25,11 @@ variable "tfe_token" {
   
 }
 
+variable "client_id" {
+  description = "The TFE organization"
+  
+}
+
 provider "tfe" {
   hostname = var.tfe_hostname
   token    = var.tfe_token
