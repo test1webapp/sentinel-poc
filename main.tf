@@ -74,5 +74,11 @@ resource "tfe_policy_set" "policy_set_4" {
   organization  = "kili"
   policies_path = "staging/"
   workspace_ids = ["ws-Y4QeVXVeVew8Skmq"]
+  vcs_repo {
+    identifier         = "test1webapp/sentinel-stage"
+    branch             = "main"
+    ingress_submodules = false
+    oauth_token_id     = var.oauth_token_id
+  }
 
 }
