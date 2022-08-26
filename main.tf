@@ -44,8 +44,17 @@ resource "tfe_policy_set" "snail" {
   workspace_ids = ["ws-nWTHbC4juL3Ltv67"]
   slug = data.tfe_slug.test
 }
+
+resource "tfe_policy_set" "skylark" {
+  name          = "security_team_sentinel_policies"
+  description   = "Policies that should be enforced on ALL infrastructure."
+  organization  = "skylark"
+  policies_path = "staging/"
+  workspace_ids = ["ws-jN3s8WtSqfyL2dad"]
+  slug = data.tfe_slug.test
+}
   
- resource "tfe_policy_set" "kili" {
+resource "tfe_policy_set" "kili" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "kili"
