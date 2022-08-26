@@ -25,13 +25,13 @@ variable "tfe_token" {
   
 }
 
-variable "oauth_token_id" {
-  description = "The TFE organization to apply your changes to."
-  
-}
 provider "tfe" {
   hostname = var.tfe_hostname
   token    = var.tfe_token
+}
+
+data "tfe_oauth_client" "client" {
+  oauth_client_id = var.client_id
 }
 
 
@@ -45,7 +45,7 @@ resource "tfe_policy_set" "policy_set_1" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
   }
 
 }
@@ -78,7 +78,7 @@ resource "tfe_policy_set" "policy_set_4" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
+    oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
     
   }
 
