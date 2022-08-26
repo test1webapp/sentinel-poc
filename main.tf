@@ -36,16 +36,6 @@ provider "tfe" {
   token    = var.tfe_token
 }
 
-
-resource "tfe_policy_set" "skylark" {
-  name          = "security_team_sentinel_policies"
-  description   = "Policies that should be enforced on ALL infrastructure."
-  organization  = "skylark"
-  policies_path = "staging/"
-  workspace_ids = ["ws-P7vBaSH4VYauZTm1","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
-  slug = data.tfe_slug.test
-}
-
 resource "tfe_policy_set" "snail" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
