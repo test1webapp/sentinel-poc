@@ -57,7 +57,7 @@ resource "tfe_policy_set" "policy_set_1" {
   }
 
 }
-resource "tfe_policy_set" "policy_set_2" {
+/*resource "tfe_policy_set" "policy_set_2" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "pigeon"
@@ -89,4 +89,20 @@ resource "tfe_policy_set" "policy_set_3" {
     
   }
 
+}*/
+
+
+data "tfe_slug" "test" {
+  // point to the local directory where the policies are located.
+  source_path = "staging"
+}
+
+resource "tfe_policy_set" "test" {
+  name          = "my-policy-set"
+  description   = "A brand new policy set"
+  organization  = "pigeon"
+  workspace_ids = ["ws-ARQa89snaZJRLQQi"]
+
+  // reference the tfe_slug data source.
+  slug = data.tfe_slug.test
 }
