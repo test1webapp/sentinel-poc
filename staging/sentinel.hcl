@@ -3,5 +3,5 @@ policy "tag-enforcement" {
 }
 
 policy "restricted-iam-actions" {
-    enforcement_level = "hard mandatory"
+    enforcement_level = "hard-mandatory"
 }
