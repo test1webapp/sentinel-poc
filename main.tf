@@ -25,14 +25,6 @@ variable "tfe_token" {
   
 }
 
-variable "oauth_token_id" {
-  description = "The TFE organization"
-  
-}
-
-variable "kili_token" {
-  description = "The TFE organization"
-}
 
 data "tfe_slug" "test" {
   // point to the local directory where the policies are located.
