@@ -49,6 +49,13 @@ resource "tfe_policy_set" "policy_set_2" {
   organization  = "pigeon"
   policies_path = "staging/"
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
+  vcs_repo {
+    identifier         = "test1webapp/sentinel-stage"
+    branch             = "main"
+    ingress_submodules = false
+    oauth_token_id     = var.oauth_token_id
+  }
+}
 
 }
 
