@@ -20,4 +20,3 @@ for cloudtrail as address, cl{
 main = rule {
     (cloudtrail_creation_not_allowed)else true
 }
-Footer
