@@ -78,7 +78,7 @@ resource "tfe_policy_set" "policy_set_4" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
+    
   }
 
 }
