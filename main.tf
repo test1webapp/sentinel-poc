@@ -30,6 +30,12 @@ variable "oauth_token_id" {
   
 }
 
+
+variable "kili_token" {
+  description = "The TFE organization"
+  
+}
+
 provider "tfe" {
   hostname = var.tfe_hostname
   token    = var.tfe_token
@@ -94,7 +100,7 @@ resource "tfe_policy_set" "policy_set_4" {
     identifier         = "test1webapp/sentinel-stage"
     branch             = "main"
     ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
+    oauth_token_id     = var.kili_token
     
   }
 
