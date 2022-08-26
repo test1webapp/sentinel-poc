@@ -73,6 +73,8 @@ resource "tfe_policy_set" "policy_set_3" {
   policies_path = "staging/"
   workspace_ids = ["ws-nWTHbC4juL3Ltv67"]
   
+}
+  
  resource "tfe_policy_set" "policy_set_4" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
