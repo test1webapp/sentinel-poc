@@ -1,38 +1,23 @@
-
-# This policy uses the Sentinel tfstate/v2 import to prevent instances of
-# the aws_iam_policy_document data source from including forbidden actions
-
-# Import common-functions/tfstate-functions/tfstate-functions.sentinel
-# with alias "state"
-import "tfstate-functions" as state
-
-# Forbidden IAM actions
-param forbidden_actions default ["iam:CreateUser",  "iam:PassRole" ,"*"]
-
-# Get all IAM policy document data sources
-allIAMPolicyDocs = state.find_datasources("aws_iam_policy_document")
-
-# Filter to IAM policy documents with violations
-validated = true
-for allIAMPolicyDocs as address, d {
-
-  # Find the statements of the current policy doc
-  statements = state.find_blocks(d, "statement")
-
-  # Filter to violating statements of current policy doc
-  violatingStatements = state.filter_attribute_contains_items_from_list(
-                        statements, "actions", forbidden_actions, false)
-
-  # Print warnings if any violating statements
-  if length(violatingStatements["messages"]) > 0 {
-    validated = false
-    print(address, "has at least one statement with forbidden actions:")
-    state.print_violations(violatingStatements["messages"], "Statement")
-  } // end if
-
-} // end for
-
-# Main rule
-main = rule {
-  validated
+##A sentinel policy to avaoid cloudtrail aws resource creation
+##Imports mock data
+import "tfplan/v2" as tfplan
+##Get all cloudtrail from terraform plan
+cloudtrail = filter tfplan.resource_changes as _, rc {
+    rc.type is "aws_cloudtrail" and (rc.change.actions contains "create")
 }
+## Rule to enforce there are no cloudtrail
+cloudtrail_creation_not_allowed = rule {
+    all cloudtrail as _, clt{
+        clt.change.actions not contains "create"        
+    }
+}
+## logging
+for cloudtrail as address, cl{
+    print(address,"Cloud trail has been enabled in payer account which will log all the events happening in its member account. Since the cloudtrail logging incurs a cost, so cloudtrail creation is not allowed")
+}
+
+##Main rule that requires other rule to be true
+main = rule {
+    (cloudtrail_creation_not_allowed)else true
+}
+Footer
