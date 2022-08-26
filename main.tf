@@ -74,7 +74,7 @@ resource "tfe_policy_set" "snail" {
 
 resource "tfe_policy_set" "pigeon" {
   name          = "security_team_sentinel_policies"
-  description   = "Security team sentinel policies"
+  description   = "Policies that should be enforced on ALL infrastructure"
   organization  = "pigeon"
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
 
