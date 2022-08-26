@@ -57,9 +57,6 @@ resource "tfe_policy_set" "policy_set_2" {
   }
 }
 
-}
-
-
 resource "tfe_policy_set" "policy_set_3" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
