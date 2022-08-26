@@ -30,10 +30,13 @@ variable "oauth_token_id" {
   
 }
 
-
 variable "kili_token" {
   description = "The TFE organization"
-  
+}
+
+data "tfe_slug" "test" {
+  // point to the local directory where the policies are located.
+  source_path = "staging"
 }
 
 provider "tfe" {
@@ -42,64 +45,36 @@ provider "tfe" {
 }
 
 
-
-resource "tfe_policy_set" "policy_set_1" {
+resource "tfe_policy_set" "skylark" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "skylark"
   policies_path = "staging/"
   workspace_ids = ["ws-P7vBaSH4VYauZTm1","ws-jN3s8WtSqfyL2dad","ws-LZzs8vC5coGs1ho8"]
-  vcs_repo {
-    identifier         = "test1webapp/sentinel-stage"
-    branch             = "main"
-    ingress_submodules = false
-    oauth_token_id     = var.oauth_token_id
-  }
-
-}
-/*resource "tfe_policy_set" "policy_set_2" {
-  name          = "security_team_sentinel_policies"
-  description   = "Policies that should be enforced on ALL infrastructure."
-  organization  = "pigeon"
-  policies_path = "staging/"
-  workspace_ids = ["ws-ARQa89snaZJRLQQi"]
-  
+  slug = data.tfe_slug.test
 }
 
-resource "tfe_policy_set" "policy_set_3" {
+resource "tfe_policy_set" "snail" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "snail"
   policies_path = "staging/"
   workspace_ids = ["ws-nWTHbC4juL3Ltv67"]
-  
+  slug = data.tfe_slug.test
 }
   
- resource "tfe_policy_set" "policy_set_4" {
+ resource "tfe_policy_set" "kili" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "kili"
   policies_path = "staging/"
   workspace_ids = ["ws-Y4QeVXVeVew8Skmq"]
-  vcs_repo {
-    identifier         = "test1webapp/sentinel-stage"
-    branch             = "main"
-    ingress_submodules = false
-    oauth_token_id     = var.kili_token
-    
-  }
-
-}*/
-
-
-data "tfe_slug" "test" {
-  // point to the local directory where the policies are located.
-  source_path = "staging"
+  slug = data.tfe_slug.test
 }
 
-resource "tfe_policy_set" "test" {
-  name          = "my-policy-set"
-  description   = "A brand new policy set"
+resource "tfe_policy_set" "pigeon" {
+  name          = "security_team_sentinel_policies"
+  description   = "Security team sentinel policies"
   organization  = "pigeon"
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
 
