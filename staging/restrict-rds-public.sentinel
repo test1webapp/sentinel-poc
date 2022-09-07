@@ -1,5 +1,5 @@
 
-import "tfplan-functions" as plan
+import "tfplan/v2" as plan
 	
 allowed_pub_access = ["false"]
 
