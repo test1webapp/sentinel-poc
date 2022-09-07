@@ -52,11 +52,11 @@ filter_attribute_not_in_list = func(resources, attr, allowed, prtmsg) {
 }
 
 # Get all DB instances
-allDBInstances = plan.find_resources("aws_db_instance")
+allDBInstances = find_resources("aws_db_instance")
 
 # Filter to DB instances with violations
 # Warnings will be printed for all violations since the last parameter is true
-violatingDBInstances = plan.filter_attribute_not_in_list(allDBInstances,
+violatingDBInstances = filter_attribute_not_in_list(allDBInstances,
                         "publicly_accessible", allowed_pub_access , true)
 
 # Count violations
