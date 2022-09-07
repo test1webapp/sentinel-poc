@@ -1,7 +1,55 @@
-
-import "tfplan-functions" as plan
+import "tfplan/v2" as tfplan
+import "strings"
+import "types"
 	
 allowed_pub_access = ["false"]
+
+# Find all resources of a specific type using the tfplan/v2 import.
+# Include resources that are not being permanently deleted.
+# Technically, this returns a map of resource changes.
+find_resources = func(type) {
+  resources = filter tfplan.resource_changes as address, rc {
+  	rc.type is type and
+  	rc.mode is "managed" and
+  	(rc.change.actions contains "create" or rc.change.actions contains "update" or
+     rc.change.actions contains "read" or (rc.change.actions contains "no-op" and
+     rc.change.after is not null))
+  }
+
+  return resources
+}
+
+### filter_attribute_not_in_list ###
+# Filter a list of resources to those with a specified
+# attribute (attr) that is not in a given list of allowed values (allowed).
+# Resources should be derived by applying filters to tfplan.resource_changes.
+# Set prtmsg to `true` (without quotes) if you want to print violation messages.
+# If you want to allow null, include "null" in the list (allowed).
+filter_attribute_not_in_list = func(resources, attr, allowed, prtmsg) {
+  violators = {}
+  messages = {}
+  for resources as address, rc {
+    # Evaluate the value (v) of the attribute
+    v = evaluate_attribute(rc, attr) else null
+    # Convert null to "null"
+    if v is null {
+      v = "null"
+    }
+    # Check if the value is not in the allowed list
+    if v not in allowed {
+      # Add the resource and a warning message to the violators list
+      message = to_string(address) + " has " + to_string(attr) + " with value " +
+                to_string(v) + " that is not in the allowed list: " +
+                to_string(allowed)
+      violators[address] = rc
+      messages[address] = message
+      if prtmsg {
+        print(message)
+      }
+    } // end if
+  } // end for
+  return {"resources":violators,"messages":messages}
+}
 
 # Get all DB instances
 allDBInstances = plan.find_resources("aws_db_instance")
