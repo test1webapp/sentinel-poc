@@ -1,7 +1,6 @@
-##A sentinel policy to avaoid cloudtrail aws resource creation
-##Imports mock data
+
 import "tfplan/v2" as tfplan
-##Get all cloudtrail from terraform plan
+
 cloudtrail = filter tfplan.resource_changes as _, rc {
     rc.type is "aws_cloudtrail" and (rc.change.actions contains "create")
 }
