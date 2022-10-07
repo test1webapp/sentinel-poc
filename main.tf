@@ -81,3 +81,13 @@ resource "tfe_policy_set" "humming-bird" {
   workspace_ids = ["ws-odrKKmaZJBds5LzL"]
   slug = data.tfe_slug.test
 }
+
+resource "tfe_policy_set" "kazhugu" {
+  name          = "security_team_sentinel_policies"
+  description   = "Policies that should be enforced on ALL infrastructure."
+  organization  = "kazhugu"
+  policies_path = "staging/"
+  workspace_ids = ["ws-KnhMYWRcQFSRxtPu"]
+  slug = data.tfe_slug.test
+}
+
