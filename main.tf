@@ -36,7 +36,7 @@ provider "tfe" {
   token    = var.tfe_token
 }
 
-resource "tfe_policy_set" "snail" {
+/*resource "tfe_policy_set" "snail" {
   name          = "security_team_sentinel_policies"
   description   = "Policies that should be enforced on ALL infrastructure."
   organization  = "snail"
@@ -70,5 +70,14 @@ resource "tfe_policy_set" "pigeon" {
   workspace_ids = ["ws-ARQa89snaZJRLQQi"]
 
   // reference the tfe_slug data source.
+  slug = data.tfe_slug.test
+}*/
+  
+resource "tfe_policy_set" "humming-bird" {
+  name          = "security_team_sentinel_policies"
+  description   = "Policies that should be enforced on ALL infrastructure."
+  organization  = "humming-bird"
+  policies_path = "staging/"
+  workspace_ids = ["ws-odrKKmaZJBds5LzL"]
   slug = data.tfe_slug.test
 }
