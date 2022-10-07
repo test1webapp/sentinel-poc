@@ -1,7 +1,7 @@
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "skylark"
+    organization = "kazhugu"
 
     workspaces {
       name = "sentinel-stage"
